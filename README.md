@@ -71,6 +71,11 @@ All frontend components are built inside a custom Drupal theme using Vite. Layou
 - Commands are managed via `package.json` inside the theme folder.
 
 ## 🧾 Git & Deployment
+<<<<<<< HEAD
+=======
+
+- This project is version-controlled with Git.
+>>>>>>> 88cda3e16342cb57bdeb0d06b06d6eb065a0145a
 - The code is structured in multiple commits to reflect development progress.
 - Deployed via Kubernetes with isolated services for PHP and database.
 
