@@ -54,6 +54,7 @@
 docker-compose.*
 Dockerfile.*
 .infrastructure/
+/db
 # ======================
 # Node / Frontend
 # ======================
@@ -74,3 +75,4 @@ yarn-error.log*
 *.DS_Store
 Thumbs.db
 .env.staging
+
