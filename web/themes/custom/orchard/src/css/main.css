@@ -12,7 +12,7 @@
     --color-primary: #fff;
     --color-charcoal-green: oklch(0.185 0.0092 196.38);
     --color-scarlet: oklch(0.5453 0.2117 22.53);
-
+    --color-modal-background: oklch(0.12 0.008 196.38);
     --color-current: currentColor;
     --color-transparent: transparent;
 

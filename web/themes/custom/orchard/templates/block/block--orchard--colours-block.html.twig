@@ -1,5 +1,12 @@
+{#
+  Section component rendering dynamic content from a CMS view.
+  Each item includes an image, title, summary, and opens a modal on click.
+  Modal interaction is handled via Alpine.js.
+#}
 {% embed '@orchard/components/section.html.twig' with { class: 'gap-y-8' } %}
   {% block slot %}
+
+    {# Section header with main title and separator #}
     <header class="span-content grid md:grid-cols-12 gap-fluid-grid-gap">
       <h2 class="uppercase tracking-wider text-2xl xl:text-3xl leading-[1.1] md:col-start-3 md:col-span-8 text-center grid justify-center-safe space-y-5">
         {{ label }}
@@ -7,37 +14,64 @@
       </h2>
     </header>
 
+    {# Grid of dynamic items from the CMS view #}
     <ul class="span-content grid md:grid-cols-12 gap-2.5">
       {% set view = content['#view'] %}
       {% if view.result %}
         {% for row in view.result %}
-          <li class="flex flex-col items-start md:col-span-8 md:col-start-3 lg:col-span-4 lg:col-start-0 space-y-7">
+          <li
+            class="md:col-span-8 md:col-start-3 lg:col-span-4 lg:col-start-0"
+            x-data="{ open: false }"
+            x-cloak
+          >
+            {# Clickable card that opens the modal and dispatches the modal-open event with the item's title as aria-label #}
+            <a
+              class="flex flex-col items-start space-y-7 cursor-pointer"
+              @click="open = true, $dispatch('modal-open', { ariaLabel: '{{ row._entity.title.value }}' })"
+            >
 
-            {# Image #}
-            {% if row._entity.field_image.0 %}
-              {% set image = row._entity.field_image.0 %}
-              <figure class="w-full aspect-[4/3] overflow-hidden">
-                <img
-                  src="{{ file_url(image.entity.fileuri) }}"
-                  alt="{{ image.alt }}"
-                  class="w-full h-full object-cover"
-                >
-              </figure>
-            {% endif %}
+              {# Image block with alt text for accessibility #}
+              {% if row._entity.field_image.0 %}
+                {% set image = row._entity.field_image.0 %}
+                <figure class="w-full aspect-[4/3] overflow-hidden">
+                  <img
+                    src="{{ file_url(image.entity.fileuri) }}"
+                    alt="{{ image.alt }}"
+                    class="w-full h-full object-cover"
+                  >
+                </figure>
+              {% endif %}
 
-            {# Content #}
-            <div class="space-y-2 w-full text-center px-7">
-              <h3 class="text-xl font-bold">
-                {{ row._entity.title.value }}
-              </h3>
-              <div class="prose leading-snug">
-                {{ row._entity.field_summary.processed|raw }}
+              {# Text content: Title and summary #}
+              <div class="space-y-2 w-full text-center px-7">
+                <h3 class="text-xl font-bold">
+                  {{ row._entity.title.value }}
+                </h3>
+                <div class="prose leading-snug">
+                  {{ row._entity.field_summary.processed|raw }}
+                </div>
               </div>
-            </div>
+            </a>
 
+            {# Modal content injected via x-teleport to main modal container #}
+            <template x-teleport="#modal-content">
+              <div x-show="open" @modal-close.window="open = false" x-transition>
+                {% if row._entity.field_image.0 %}
+                  {% set image = row._entity.field_image.0 %}
+                  <figure class="w-full aspect-[4/3] overflow-hidden">
+                    <img
+                      src="{{ file_url(image.entity.fileuri) }}"
+                      alt="{{ image.alt }}"
+                      class="w-full h-full object-cover"
+                    >
+                  </figure>
+                {% endif %}
+              </div>
+            </template>
           </li>
         {% endfor %}
       {% endif %}
     </ul>
+
   {% endblock %}
 {% endembed %}

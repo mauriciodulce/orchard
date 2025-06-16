@@ -23,14 +23,14 @@
  * @see template_preprocess_html()
  */
 #}
-{%
-  set body_classes = [
-    logged_in ? 'user-logged-in',
-    not root_path ? 'path-frontpage' : 'path-' ~ root_path|clean_class,
-    node_type ? 'page-node-type-' ~ node_type|clean_class,
-    db_offline ? 'db-offline',
-  ]
-%}
+
+{% set body_classes = [
+  logged_in ? 'user-logged-in',
+  not root_path ? 'path-frontpage' : 'path-' ~ root_path|clean_class,
+  node_type ? 'page-node-type-' ~ node_type|clean_class,
+  db_offline ? 'db-offline',
+] %}
+
 <!DOCTYPE html>
 <html{{ html_attributes }}>
   <head>
@@ -39,19 +39,67 @@
     <css-placeholder token="{{ placeholder_token }}">
     <js-placeholder token="{{ placeholder_token }}">
   </head>
+
   <body{{ attributes.addClass(body_classes).addClass('bg-charcoal-green flex flex-col min-h-screen text-white') }}>
-    {#
-      Keyboard navigation/accessibility link to main content section in
-      page.html.twig.
-    #}
-    <div class="bg-black">
-    </div>
+
+    {# Accessibility skip link #}
     <a href="#main-content" class="visually-hidden focusable skip-link">
       {{ 'Skip to main content'|t }}
     </a>
+
+    {# Optional top bar or background layer #}
+    <div class="bg-black"></div>
+
     {{ page_top }}
     {{ page }}
     {{ page_bottom }}
+
     <js-bottom-placeholder token="{{ placeholder_token }}">
+
+    {# Alpine-powered global modal component (teleported content goes in #modal-content) #}
+    {% block modal %}{% endblock %}
+    <div
+      x-data="{
+        modalOpen: false,
+        ariaLabel: '',
+        close() {
+          this.modalOpen = false
+          $dispatch('modal-close')
+        }
+      }"
+      x-show="modalOpen"
+      @modal-open.window="modalOpen = true, ariaLabel = $event.detail.ariaLabel"
+      @keydown.escape.window="close()"
+      x-trap.noscroll.inert="modalOpen"
+      role="dialog"
+      :aria-label="ariaLabel"
+      aria-modal="true"
+      x-cloak
+      class="fixed inset-0 p-4 z-50 flex justify-center items-end md:items-center"
+    >
+      <div
+        x-show="modalOpen"
+        @click="close()"
+        class="absolute inset-0 bg-black/80"
+        x-transition.opacity.duration.400ms
+      ></div>
+
+      <div
+        x-show="modalOpen"
+        class="relative w-full p-4 md:p-8 max-w-2xl max-h-[calc(100vh-2rem)] bg-modal-background shadow-lg overflow-auto"
+        x-transition
+      >
+        <div id="modal-content"></div>
+
+        <div class="pt-6 flex justify-end">
+          <a
+            class="inline-flex items-baseline gap-0.5 font-bold motion-safe:transition cursor-pointer"
+            @click="close()"
+          >
+            <span class="min-w-fit font-light uppercase text-sm">close modal</span>
+          </a>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

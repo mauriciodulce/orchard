@@ -1,8 +1,13 @@
 {#
   @name block
   @desc The builder block wrapper
+
+  This component acts as a layout container for builder sections.
+  - Applies fluid grid padding and any extra classes passed via the `class` context variable.
+  - Uses a Twig block `slot` for injecting nested content.
 #}
 
 <section class="fluid-grid {{ class }}">
-  {% block slot %}{% endblock %}
+  {% block slot %}
+  {% endblock %}
 </section>
