@@ -1,0 +1,65 @@
+{% embed '@orchard/components/section.html.twig' with { class: 'overflow-x-clip' } %}
+  {% block slot %}
+    <section class="span-content stack-20 lg:stack-24">
+      <div class="grid lg:grid-cols-12 gap-x-fluid-grid-gap gap-8">
+
+        {% set valid_images = [] %}
+        {% for item in content.field_gallery %}
+          {% if item['#item'] %}
+            {% set valid_images = valid_images | merge([item]) %}
+          {% endif %}
+        {% endfor %}
+
+        {% if valid_images is not empty %}
+          <div class="stack-8 lg:col-span-8">
+            <div class="grid grid-cols-6 grid-rows-2 gap-2 [&_img]:w-full [&_img]:h-full [&_img]:object-cover" role="list">
+              {% for item in valid_images %}
+                {% if loop.index <= 3 %}
+                  <figure class="overflow-hidden {{ loop.index == 1 ? 'col-span-3 row-span-2' : 'col-span-3 row-span-1' }}">
+                    {{ item }}
+                  </figure>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if content.field_title['#items'] is not empty or content.body is defined or content.field_highlight_title['#items'] is not empty %}
+          <div class="lg:col-span-4 self-stretch space-y-5 xl:space-y-8">
+
+            {% if content.field_title['#items'] is not empty %}
+              <header>
+                <h2 class="uppercase tracking-wider text-2xl xl:text-3xl leading-[1.1] border-b border-current pb-5 xl:pb-7">
+                  {{ content.field_title['#items'][0].value }}
+                </h2>
+              </header>
+            {% endif %}
+
+            {% if content.body is defined and content.body is not empty %}
+              <article class="prose text-lg xl:text-xl font-light">
+                {{ content.body }}
+              </article>
+            {% endif %}
+
+            {% if content.field_highlight_title['#items'] is not empty or content.field_highlight_description is defined %}
+              <div class="grid space-y-2.5">
+                {% if content.field_highlight_title['#items'] is not empty %}
+                  <h3 class="uppercase text-scarlet font-bold text-sm tracking-wide">
+                    {{ content.field_highlight_title['#items'][0].value }}
+                  </h3>
+                {% endif %}
+                {% if content.field_highlight_description is defined %}
+                  <article class="prose text-lg lg:text-xl">
+                    {{ content.field_highlight_description.0 }}
+                  </article>
+                {% endif %}
+              </div>
+            {% endif %}
+
+          </div>
+        {% endif %}
+
+      </div>
+    </section>
+  {% endblock %}
+{% endembed %}

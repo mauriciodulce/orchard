@@ -3,12 +3,14 @@ type: theme
 base theme: stable9
 core_version_requirement: ^11
 version: 1.0.0
-
 libraries:
   - orchard/base
   - orchard/messages
   - core/normalize
-
+component-libraries:
+  components:
+    paths:
+      - templates/components
 vite:
   enableInAllLibraries: true
   enableInAllComponents: true

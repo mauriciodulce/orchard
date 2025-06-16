@@ -23,3 +23,11 @@ function orchard_preprocess_image_widget(array &$variables): void
         unset($data["preview"]);
     }
 }
+/**
+ * Implements hook_init().
+ */
+function orchard_init(): void
+{
+    $path = \Drupal::service(ExtensionPathResolver::class)->getPath('theme', 'orchard');
+    \Drupal::service('twig.loader.filesystem')->addPath("$path/templates/components", 'components');
+}
