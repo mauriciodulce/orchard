@@ -1,0 +1,21 @@
+base:
+  vite: true
+  js:
+    src/js/main.js: {}
+  css:
+    component:
+      src/css/main.css: {}
+  dependencies:
+    - core/drupalSettings
+# main:
+#   js:
+#     dist/app.js: {}
+#   css:
+#     theme:
+#       dist/app.css: {}
+#   vite:
+#     enabled: true
+#     manifest: dist/.vite/manifest.json
+#     baseUrl: "/themes/custom/orchard/dist/"
+#     devDependencies:
+#       - some_module/some_lib.devmode

@@ -1,0 +1,75 @@
+# ======================
+# Composer & general
+# ======================
+/vendor/
+/composer.phar
+
+# ======================
+# Drupal
+# ======================
+/web/core/
+/web/modules/contrib/
+/web/themes/contrib/
+/web/profiles/contrib/
+
+/web/sites/*/files/
+/web/sites/*/private/
+/web/sites/simpletest/
+
+/web/sites/default/settings.local.php
+/web/sites/default/services.local.yml
+/web/sites/default/files/
+/web/sites/default/private/
+/web/sites/default/files-private/
+/web/sites/default/files-translations/
+/web/sites/default/files/tmp/
+/web/sites/default/files/php/twig/
+/web/sites/default/settings.local.php
+/web/sites/default/services.local.yml
+# ======================
+# DDEV
+# ======================
+.ddev/.dbimageBuild
+.ddev/import-db
+.ddev/nfs-mount
+.ddev/.webimageBuild
+.ddev/.sshimageBuild
+.ddev/sequelpro.spf
+.ddev/db_snapshots/
+/.ddev/docker-compose.*
+.ddev/*.tar.gz
+/.ddev/*.pid
+/.ddev/.allow-upgrade
+.ddev/addon-metadata/ddev-viteserve/manifest.yaml
+/.ddev/.env
+/.ddev/web-build
+/.ddev/viteserve
+/.ddev/commands
+
+# ======================
+# Infrastructure
+# ======================
+.vault-password
+.spin.yml
+docker-compose.*
+Dockerfile.*
+.infrastructure/
+# ======================
+# Node / Frontend
+# ======================
+node_modules/
+dist/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ======================
+# IDEs / OS
+# ======================
+*.swp
+*.swo
+.idea/
+.vscode/
+*.DS_Store
+Thumbs.db

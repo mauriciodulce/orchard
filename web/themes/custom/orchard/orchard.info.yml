@@ -1,0 +1,14 @@
+name: orchard
+type: theme
+base theme: stable9
+core_version_requirement: ^11
+version: 1.0.0
+
+libraries:
+  - orchard/base
+  - orchard/messages
+  - core/normalize
+
+vite:
+  enableInAllLibraries: true
+  enableInAllComponents: true
