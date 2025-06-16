@@ -95,7 +95,7 @@ $databases['default']['default'] = [
   'database' => getenv('MARIADB_DATABASE'),
   'username' => getenv('MARIADB_USER'),
   'password' => getenv('MARIADB_PASSWORD'),
-  'host' => 'mariadb', // o el nombre de tu servicio de base de datos
+  'host' => 'mariadb', // name of db service
   'port' => '3306',
   'prefix' => '',
 ];
@@ -296,8 +296,7 @@ $databases['default']['default'] = [
  *   $settings['hash_salt'] = file_get_contents('/home/example/salt.txt');
  * @endcode
  */
-$settings['hash_salt'] = '';
-
+$settings['hash_salt'] = getenv('DRUPAL_HASH_SALT');
 /**
  * Deployment identifier.
  *

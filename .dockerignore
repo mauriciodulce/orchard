@@ -34,8 +34,6 @@ docker-*.yml
 .spin*
 .env.*
 .infrastructure
-!.infrastructure/**/local-ca.pem
-!.infrastructure/**/90-wordpress.sh
 herd.yml
 
 # Node / JS / TS
@@ -59,3 +57,5 @@ db/
 
 # Drupal files that should not be copied
 web/sites/default/files
+!web/sites/default/files/2025-06
+!web/sites/default/files/styles
