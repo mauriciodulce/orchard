@@ -1,0 +1,9 @@
+base:
+  vite: true
+  js:
+    src/js/main.js: {}
+  css:
+    component:
+      src/css/main.css: {}
+  dependencies:
+    - core/drupalSettings
