@@ -1,6 +1,6 @@
-{% embed '@orchard/components/section.html.twig' with { class: 'overflow-x-clip' } %}
+{% embed '@orchard/components/section.html.twig' with { class: 'overflow-x-clip no-space-t' } %}
   {% block slot %}
-    <section class="span-content stack-20 lg:stack-24 ">
+    <div class="span-content stack-20 lg:stack-24 ">
       <div class="grid lg:grid-cols-12 gap-x-fluid-grid-gap gap-8 ">
 
         {% set valid_images = [] %}
@@ -15,7 +15,7 @@
             <div class="grid grid-cols-6 grid-rows-2 gap-2 [&_img]:w-full [&_img]:h-full [&_img]:object-cover" role="list">
               {% for item in valid_images %}
                 {% if loop.index <= 3 %}
-                  <figure class="overflow-hidden {{ loop.index == 1 ? 'col-span-3 row-span-2' : 'col-span-3 row-span-1' }}">
+                  <figure role="listitem" class="overflow-hidden {{ loop.index == 1 ? 'col-span-3 row-span-2' : 'col-span-3 row-span-1' }}">
                     {{ item }}
                   </figure>
                 {% endif %}
@@ -60,6 +60,6 @@
         {% endif %}
 
       </div>
-    </section>
+    </div>
   {% endblock %}
 {% endembed %}

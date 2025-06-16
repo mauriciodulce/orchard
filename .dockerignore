@@ -1,0 +1,61 @@
+# Mac & editor junk
+.DS_Store
+.editorconfig
+.nvmrc
+.idea
+.vscode
+recipes/
+
+# Git y CI
+.git
+.gitignore
+.gitattributes
+.gitmodules
+.gitkeep
+.github
+.gitlab-ci.yml
+.vault-password
+.gitpod*
+.gitpod.yml
+.gitpod.dockerfile
+.gitpod.docker-compose.yml
+
+# DDEV & entorno local
+.ddev
+**/settings.ddev.php
+**/development.services.yml
+wp-config-ddev.php
+.lando.*
+
+# Infraestructura
+.dockerignore
+Dockerfile*
+docker-*.yml
+.spin*
+.env.*
+.infrastructure
+!.infrastructure/**/local-ca.pem
+!.infrastructure/**/90-wordpress.sh
+herd.yml
+
+# Node / JS / TS
+node_modules
+web/themes/custom/orchard/node_modules
+web/themes/custom/orchard/src
+package.json
+package-lock.json
+yarn.lock
+bud.config.ts
+playwright.config.{js,ts}
+tsconfig.json
+vite.config*.js
+
+# PHP / Testing
+phpunit.xml
+pint.json
+
+# Database files
+db/
+
+# Drupal files that should not be copied
+web/sites/default/files

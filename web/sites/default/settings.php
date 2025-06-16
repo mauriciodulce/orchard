@@ -90,7 +90,15 @@
  * ];
  * @endcode
  */
-$databases = [];
+$databases['default']['default'] = [
+  'driver' => 'mysql',
+  'database' => getenv('MARIADB_DATABASE'),
+  'username' => getenv('MARIADB_USER'),
+  'password' => getenv('MARIADB_PASSWORD'),
+  'host' => 'mariadb', // o el nombre de tu servicio de base de datos
+  'port' => '3306',
+  'prefix' => '',
+];
 
 /**
  * Customizing database settings.
